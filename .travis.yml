@@ -31,4 +31,4 @@ notifications:
 env:
   global:
     # 我将其添加到了travis-ci的环境变量中
-    # - GH_REF: github.com/LeachZhou/blog.git
+    - GH_REF: github.com/xkloveme/whatisit.git
