@@ -1,40 +1,77 @@
+<!--
+ * @describe: 描述
+ * @Author: superDragon
+ * @Date: 2019-07-06 09:07:03
+ * @LastEditors: superDragon
+ * @LastEditTime: 2019-09-10 17:06:49
+ -->
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <h1>弄啥哩</h1>
+    <input v-model="fun" style="height:200px;width:500px;" type="text" />
+    <br />
+    {{ fun }}
+    <br />
+    要转换的字符串流：
+    <input v-model="sourceCode" type="text" />
+    <button @click="run">解码/运行</button>
+    <iframe :src="src" ref="iframe" frameborder="0" scrolling="auto"></iframe>
+    {{ result }}
   </div>
 </template>
 
 <script>
+// eslint-disable
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      src: 'https://allinone-ufile.hekr.me/xiaofang-web/7638634c8f9548b089d01d22f853ae9b/iframe.html',
+      fun: `function reportData (data) {
+      return {
+        cmdId: data,
+        data: '返回数据：' + data
+      }
+    }`,
+      sourceCode: null,
+      result: null,
+      receivedFromWorker: false,
+      iframeWin: null
+    }
+  },
+  methods: {
+    run () {
+      // 发送数据
+      this.iframeWin.postMessage({
+        cmd: 'getFormJson',
+        params: { code: this.fun + `;reportData(${this.sourceCode});` }
+      }, '*')
+    },
+    handleMessage (event) {
+      // 根据上面制定的结构来解析iframe内部发回来的数据
+      const data = event.data
+      // eslint-disable-next-line
+      console.log(data, '子组件传输')
+      switch (data.cmd) {
+        case 'returnJson':
+          this.receivedFromWorker = true;
+          if (data.params) {
+            this.result = data.params
+          }
+          break
+        case 'returnHeight':
+          // 业务逻辑
+          break
+      }
+    }
+  },
+  mounted () {
+    // 在外部vue的window上添加postMessage的监听，并且绑定处理函数handleMessage
+    window.addEventListener('message', this.handleMessage)
+    this.iframeWin = this.$refs.iframe.contentWindow
   }
 }
 </script>
