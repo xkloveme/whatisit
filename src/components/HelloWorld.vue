@@ -3,14 +3,14 @@
  * @Author: superDragon
  * @Date: 2019-07-06 09:07:03
  * @LastEditors: superDragon
- * @LastEditTime: 2019-09-10 17:06:49
+ * @LastEditTime: 2019-09-10 17:56:49
  -->
 <template>
   <div class="hello">
     <h1>弄啥哩</h1>
-    <input v-model="fun" style="height:200px;width:500px;" type="text" />
-    <br />
-    {{ fun }}
+    <div style="width:500px;margin:0 auto;">
+      <codemirror v-model="fun" style="text-align: left;" :options="cmOption"></codemirror>
+    </div>
     <br />
     要转换的字符串流：
     <input v-model="sourceCode" type="text" />
@@ -21,15 +21,18 @@
 </template>
 
 <script>
+import { codemirror } from 'vue-codemirror'
 // eslint-disable
 export default {
   name: 'HelloWorld',
+  components: { codemirror },
   props: {
     msg: String
   },
   data () {
     return {
-      src: 'https://allinone-ufile.hekr.me/xiaofang-web/7638634c8f9548b089d01d22f853ae9b/iframe.html',
+      // src: 'https://allinone-ufile.hekr.me/xiaofang-web/7638634c8f9548b089d01d22f853ae9b/iframe.html',
+      src: 'https://allinone-ufile.hekr.me/xiaofang-web/167c9f404da64e91a72f45322683b199/iframe.html',
       fun: `function reportData (data) {
       return {
         cmdId: data,
@@ -39,7 +42,17 @@ export default {
       sourceCode: null,
       result: null,
       receivedFromWorker: false,
-      iframeWin: null
+      iframeWin: null,
+      cmOption: {
+        value: '<p>hello</p>',
+        origLeft: null,
+        orig: '<p>hello world</p>',
+        connect: 'align',
+        mode: 'text/html',
+        lineNumbers: true,
+        collapseIdentical: false,
+        highlightDifferences: true
+      }
     }
   },
   methods: {
@@ -47,7 +60,8 @@ export default {
       // 发送数据
       this.iframeWin.postMessage({
         cmd: 'getFormJson',
-        params: { code: this.fun + `;reportData(${this.sourceCode});` }
+        code: this.fun,
+        params: this.sourceCode
       }, '*')
     },
     handleMessage (event) {

@@ -3,7 +3,7 @@
  * @Author: superDragon
  * @Date: 2019-09-10 15:39:31
  * @LastEditors: superDragon
- * @LastEditTime: 2019-09-10 17:03:10
+ * @LastEditTime: 2019-09-10 17:55:49
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,10 +16,10 @@
       // 接受父页面发来的信息
       window.addEventListener('message', function(event) {
         var data = event.data
-        console.log(data, '父传递过来')
         switch (data.cmd) {
           case 'getFormJson':
-            const result = eval(data.params.code)
+            let reportData = new Function('"use strict";return (' + data.code + ')')()
+            const result = reportData(data.params)
             window.parent.postMessage(
               {
                 cmd: 'returnJson',
