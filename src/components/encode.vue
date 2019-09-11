@@ -3,11 +3,11 @@
  * @Author: superDragon
  * @Date: 2019-07-06 09:07:03
  * @LastEditors: superDragon
- * @LastEditTime: 2019-09-10 17:56:49
+ * @LastEditTime: 2019-09-11 10:02:45
  -->
 <template>
   <div class="hello">
-    <h1>弄啥哩</h1>
+    <h1>弄点啥</h1>
     <div style="width:500px;margin:0 auto;">
       <codemirror v-model="fun" style="text-align: left;" :options="cmOption"></codemirror>
     </div>
@@ -15,8 +15,9 @@
     要转换的字符串流：
     <input v-model="sourceCode" type="text" />
     <button @click="run">解码/运行</button>
+    <br />
     <iframe :src="src" ref="iframe" frameborder="0" scrolling="auto"></iframe>
-    {{ result }}
+    结果：{{ result }}
   </div>
 </template>
 
@@ -31,8 +32,8 @@ export default {
   },
   data () {
     return {
-      // src: 'https://allinone-ufile.hekr.me/xiaofang-web/7638634c8f9548b089d01d22f853ae9b/iframe.html',
-      src: 'https://allinone-ufile.hekr.me/xiaofang-web/167c9f404da64e91a72f45322683b199/iframe.html',
+      src: '/iframe.html',
+      // src: 'https://allinone-ufile.hekr.me/xiaofang-web/167c9f404da64e91a72f45322683b199/iframe.html',
       fun: `function reportData (data) {
       return {
         cmdId: data,
@@ -44,9 +45,7 @@ export default {
       receivedFromWorker: false,
       iframeWin: null,
       cmOption: {
-        value: '<p>hello</p>',
         origLeft: null,
-        orig: '<p>hello world</p>',
         connect: 'align',
         mode: 'text/html',
         lineNumbers: true,
@@ -59,7 +58,7 @@ export default {
     run () {
       // 发送数据
       this.iframeWin.postMessage({
-        cmd: 'getFormJson',
+        cmd: 'getJson',
         code: this.fun,
         params: this.sourceCode
       }, '*')
@@ -71,12 +70,11 @@ export default {
       console.log(data, '子组件传输')
       switch (data.cmd) {
         case 'returnJson':
-          this.receivedFromWorker = true;
           if (data.params) {
             this.result = data.params
           }
           break
-        case 'returnHeight':
+        case 'error':
           // 业务逻辑
           break
       }
@@ -84,6 +82,7 @@ export default {
   },
   mounted () {
     // 在外部vue的window上添加postMessage的监听，并且绑定处理函数handleMessage
+    // eslint-disable-next-line
     window.addEventListener('message', this.handleMessage)
     this.iframeWin = this.$refs.iframe.contentWindow
   }

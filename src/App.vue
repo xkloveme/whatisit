@@ -1,16 +1,23 @@
+<!--
+ * @describe: 描述
+ * @Author: superDragon
+ * @Date: 2019-07-06 09:07:03
+ * @LastEditors: superDragon
+ * @LastEditTime: 2019-07-06 09:07:03
+ -->
 <template>
   <div id="app">
-    <HelloWorld />
+    <encode />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import encode from './components/encode.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    encode
   }
 }
 </script>
