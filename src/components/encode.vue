@@ -3,7 +3,7 @@
  * @Author: superDragon
  * @Date: 2019-07-06 09:07:03
  * @LastEditors: superDragon
- * @LastEditTime: 2019-09-11 10:02:45
+ * @LastEditTime: 2019-09-11 10:18:51
  -->
 <template>
   <div class="hello">
@@ -32,7 +32,7 @@ export default {
   },
   data () {
     return {
-      src: '/iframe.html',
+      src: 'iframe.html',
       // src: 'https://allinone-ufile.hekr.me/xiaofang-web/167c9f404da64e91a72f45322683b199/iframe.html',
       fun: `function reportData (data) {
       return {
