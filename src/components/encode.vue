@@ -3,7 +3,7 @@
  * @Author: superDragon
  * @Date: 2019-07-06 09:07:03
  * @LastEditors: superDragon
- * @LastEditTime: 2019-09-11 10:18:51
+ * @LastEditTime: 2019-09-12 09:59:12
  -->
 <template>
   <div class="hello">
@@ -13,10 +13,10 @@
     </div>
     <br />
     要转换的字符串流：
-    <input v-model="sourceCode" type="text" />
+    <input v-model="sourceCode" style="height:20px;width:300px;margin:0 auto;" type="text" />
     <button @click="run">解码/运行</button>
     <br />
-    <iframe :src="src" ref="iframe" frameborder="0" scrolling="auto"></iframe>
+    <iframe :src="src" style="display:none;" ref="iframe" frameborder="0" scrolling="auto"></iframe>
     结果：{{ result }}
   </div>
 </template>
@@ -25,7 +25,7 @@
 import { codemirror } from 'vue-codemirror'
 // eslint-disable
 export default {
-  name: 'HelloWorld',
+  name: 'encode',
   components: { codemirror },
   props: {
     msg: String
@@ -33,14 +33,27 @@ export default {
   data () {
     return {
       src: 'iframe.html',
-      // src: 'https://allinone-ufile.hekr.me/xiaofang-web/167c9f404da64e91a72f45322683b199/iframe.html',
-      fun: `function reportData (data) {
-      return {
-        cmdId: data,
-        data: '返回数据：' + data
-      }
-    }`,
-      sourceCode: null,
+      fun: `function raw2Protocol(reportData) {
+  let deviceStatus=function(reportData) {
+   let str = reportData
+  let jsonMap = new Object()
+  let data = Number(reportData.substring(reportData.length - 2, reportData.length - 4))
+  jsonMap['data'] = data
+  jsonMap['cmdId'] = 1
+  let deviceType = reportData.substring(4, 6)
+  let device = ''
+  let type = [{ id: '00', name: 'Smoke' }, { id: '01', name: 'CO' }, { id: '02', name: 'GAS' }]
+  for (const key in type) {
+    if (type[key].id === deviceType) {
+      device = type[key].name
+    }
+  }
+  jsonMap['deviceType'] = device
+  return jsonMap
+}
+    return deviceStatus(reportData)
+}`,
+      sourceCode: '55AA00015A',
       result: null,
       receivedFromWorker: false,
       iframeWin: null,
