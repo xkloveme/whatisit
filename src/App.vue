@@ -1,30 +1,24 @@
-<!--
- * @describe: 描述
- * @Author: superDragon
- * @Date: 2019-07-06 09:07:03
- * @LastEditors: superDragon
- * @LastEditTime: 2019-07-06 09:07:03
- -->
 <template>
   <div id="app">
-    <encode />
+    <player />
   </div>
 </template>
 
 <script>
-import encode from './components/encode.vue'
+// import encode from "./components/encode.vue";
+import player from "./page/player";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    encode
+    player
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

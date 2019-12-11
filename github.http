@@ -1,0 +1,6 @@
+@api = https://api.github.com
+@contentType = application/json
+@access_token= 
+# @name allapi
+GET {{api}}?access_token=
+Content-Type: {{contentType}}
