@@ -80,9 +80,8 @@ export default {
           this.player = new Player(this.config)
         }
         this.player.once('ready', () => {
-          console.log('ready', this.player)
+          this.$emit('player', this.player)
         })
-        this.$emit('player', this.player)
       }
     }
   },

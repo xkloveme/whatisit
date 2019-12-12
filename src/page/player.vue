@@ -1,11 +1,7 @@
 <template>
   <div>
     hls:
-    <VueXgplayer
-      :config="configHls"
-      format="hls"
-      @player="HlsPlayer = $event"
-    ></VueXgplayer>
+    <VueXgplayer :config="configHls" format="hls" @player="HlsPlayer = $event"></VueXgplayer>
   </div>
 </template>
 
@@ -15,7 +11,7 @@ import VueXgplayer from "./../components/xgplayer-vue";
 export default {
   name: "player",
   components: { VueXgplayer },
-  data() {
+  data () {
     return {
       configHls: {
         id: "vs6",
@@ -30,11 +26,11 @@ export default {
       HlsPlayer: null
     };
   },
-  mounted() {
+  mounted () {
     this.getData();
   },
   methods: {
-    getData() {
+    getData () {
       // var xhr = new XMLHttpRequest();
       // xhr.open("GET", "./../assets/movies.m3u");
       // xhr.overrideMimeType("audio/x-mpegurl"); // Needed, see below.
@@ -48,7 +44,7 @@ export default {
       //     console.log(88, res.json());
       //   });
     },
-    parse() {}
+    parse () { }
   }
 };
 </script>

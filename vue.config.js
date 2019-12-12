@@ -16,11 +16,7 @@ module.exports = {
       .tap(([env]) => {
         env['process.env'] = {
           ...env['process.env'],
-          API: `"${process.env.API}"`,
-          uaa: `"${process.env.uaa}"`,
-          fire: `"${process.env.fire}"`,
-          console: `"${process.env.console}"`,
-          websocket: `"${process.env.websocket}"`
+          BABEL_ENV: `"${process.env.BABEL_ENV}"`
         }
         return [env]
       })

@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "cross-env BABEL_ENV=development vue-cli-service  serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.4.8",
+    "flowplayer-hlsjs": "github:flowplayer/flowplayer-hlsjs",
+    "hls.js": "^0.12.4",
+    "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.6.10",
     "vue-codemirror": "^4.0.6",
+    "vue-video-player": "^5.0.2",
     "xgplayer": "^2.3.6",
     "xgplayer-flv": "^1.1.5",
     "xgplayer-flv.js": "^2.1.1",
@@ -25,6 +29,8 @@
     "@vue/cli-plugin-eslint": "^4.1.1",
     "@vue/cli-service": "^4.1.1",
     "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.3",
+    "devtools-detector": "^1.0.21",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.0.1",
     "vue-template-compiler": "^2.6.10"
