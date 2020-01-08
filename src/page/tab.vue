@@ -1,13 +1,21 @@
 <template>
   <div class="page_home">
     <div class="home_left">
-      <h1 style="color:red;">haha</h1>
-      <!-- <hls />
-      <player /> -->
+      <a href="https://github.com/xkloveme/whatisit" target="_blank">
+        <img
+          src="./../assets/logo.png"
+          alt="弄啥哩"
+          class="Rotation"
+          style="margin:30px auto;width:40px;height:40px;border-radius: 100%;filter: grayscale(1);"
+        />
+      </a>
+      <h1 class="home_title">节目名称:{{ playInfo.title }}</h1>
+      <player class="home_video" :url="playInfo.url" v-if="change" />
+      <hls class="home_video" :url="playInfo.url" v-else />
     </div>
     <Slide right @closeMenu="closeMenu" disableOutsideClick class="home_right">
       <details class="menu" close v-for="(item, i) in TV" :key="i">
-        <summary> 节目{{ i }}</summary>
+        <summary> 节目分类{{ i }}</summary>
         <li
           class="right_button"
           v-for="(sub, j) in item"
@@ -22,20 +30,20 @@
 </template>
 
 <script>
-// import player from "./player";
-// import hls from "./hls";
+import player from "./player";
+import hls from "./hls";
 import { Slide } from "vue-burger-menu";
 import axios from "axios";
 export default {
   components: {
-    // player,
-    // hls,
+    player,
+    hls,
     Slide
   },
   data() {
     return {
-      change: true,
-      play: {},
+      change: false,
+      playInfo: {},
       TV: {}
     };
   },
@@ -49,7 +57,7 @@ export default {
       });
     },
     openVideo(info) {
-      this.play = info;
+      this.playInfo = info;
     },
     closeMenu(a) {
       console.log("🐛🐛🐛: closeMenu -> a", a);
@@ -59,18 +67,56 @@ export default {
 </script>
 
 <style>
-.page_home {
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
-.home_left {
-  /* position: -webkit-sticky;
+.page_home {
+  -moz-user-select: none; /*火狐*/
+  -webkit-user-select: none; /*webkit浏览器*/
+  -ms-user-select: none; /*IE10*/
+  -khtml-user-select: none; /*早期浏览器*/
+  user-select: none;
+}
+.home_title {
+  height: 40px;
+  line-height: 40px;
+  text-indent: 10px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 700;
+  border-top: 1px solid #ddd;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #fefefe),
+    color-stop(1, #cccccc)
+  );
+  cursor: pointer;
+}
+.home_video {
+  position: -webkit-sticky;
   position: sticky;
-  width: 100%;
-  height: 500px;
+  width: 100% !important;
   text-align: center;
   color: #fff;
   margin-bottom: 50px;
   top: 0;
-  z-index: 1; */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.Rotation {
+  -webkit-transform: rotate(360deg);
+  animation: rotation 4s linear infinite;
+  -moz-animation: rotation 4s linear infinite;
+  -webkit-animation: rotation 4s linear infinite;
+  -o-animation: rotation 4s linear infinite;
 }
 .home_right {
   width: 100%;
@@ -81,6 +127,8 @@ export default {
 .bm-item-list {
   color: #000 !important;
   margin-left: 0% !important;
+  margin-bottom: 100px;
+  border: solid;
 }
 .right_button {
   cursor: pointer;

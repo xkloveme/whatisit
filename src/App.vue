@@ -3,8 +3,10 @@
     <about v-if="view" />
     <tab v-else />
     <footer class="footer">
-      Copyright © 冀小康 2020 Theme by
-      <a href="https://github.com/xkloveme/whatisit">xkloveme</a>
+      Copyright © 冀小康 2020 Power by
+      <a href="https://github.com/xkloveme/whatisit" target="_blank"
+        >xkloveme</a
+      >
       <iframe
         style="margin-left: 2px; margin-bottom:-5px;"
         frameborder="0"
@@ -31,7 +33,7 @@ export default {
   },
   data() {
     return {
-      view: true,
+      view: false,
       start: 2
     };
   },
@@ -41,8 +43,6 @@ export default {
         this.view = isOpen;
       });
       lanuch();
-    } else {
-      this.view = false;
     }
   }
 };
@@ -55,6 +55,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  -moz-user-select: none; /*火狐*/
+  -webkit-user-select: none; /*webkit浏览器*/
+  -ms-user-select: none; /*IE10*/
+  -khtml-user-select: none; /*早期浏览器*/
+  user-select: none;
 }
 .footer {
   position: fixed;

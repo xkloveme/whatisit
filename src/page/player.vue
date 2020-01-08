@@ -1,5 +1,10 @@
 <template>
-  <VueXgplayer :config="configHls" format="hls" @player="HlsPlayer = $event"></VueXgplayer>
+  <VueXgplayer
+    :config="configHls"
+    format="hls"
+    refs="player"
+    @player="HlsPlayer = $event"
+  ></VueXgplayer>
 </template>
 
 <script>
@@ -7,37 +12,32 @@ import VueXgplayer from "./../components/xgplayer-vue";
 export default {
   name: "player",
   components: { VueXgplayer },
-  data () {
+  props: ["url"],
+  data() {
     return {
-      configHls: {
+      HlsPlayer: null
+    };
+  },
+  computed: {
+    configHls() {
+      return {
         id: "vs6",
         useHls: true,
         preloadTime: 3000,
         url:
-          "http://js.hls.huya.com/huyalive/29106097-2689446042-11551082794746642432-2789253870-10057-A-0-1_1200.m3u8"
-      },
-      HlsPlayer: null
-    };
+          this.url ||
+          "http://223.110.242.130:6610/gitv/live1/G_CCTV-1-HQ/1.m3u8"
+      };
+    }
   },
-  mounted () {
+  mounted() {
     this.getData();
   },
   methods: {
-    getData () {
-      // var xhr = new XMLHttpRequest();
-      // xhr.open("GET", "./../assets/movies.m3u");
-      // xhr.overrideMimeType("audio/x-mpegurl"); // Needed, see below.
-      // xhr.onload = this.parse();
-      // xhr.send();
-      // fetch("./../assets/movies.m3u")
-      //   .then(response => {
-      //     return response;
-      //   })
-      //   .then(res => {
-      //     console.log(88, res.json());
-      //   });
+    getData() {
+      this.$refs["player"].init();
     },
-    parse () { }
+    parse() {}
   }
 };
 </script>

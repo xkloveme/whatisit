@@ -1,7 +1,7 @@
 <template>
-  <div style="margin:0 100px;">
+  <div class="about_us">
     <h1>
-      whatisit创建于2019年，whatisit从创立之初就坚持“网络资源共享”的精神。
+      whatisit创建于2020年，whatisit从创立之初就坚持“网络资源共享”的精神。
     </h1>
     <h2>
       “分享，学习，进步”是whatisit的宗旨，在分享中学习，在学习中进步是我们的目的！
@@ -24,4 +24,15 @@
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+.about_us {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 900;
+  padding: 15% 10%;
+}
+</style>

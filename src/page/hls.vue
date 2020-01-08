@@ -6,18 +6,18 @@
 import Hls from "hls.js";
 
 export default {
-  data () {
-    return {
-      //
-    };
+  props: ["url"],
+  watch: {
+    url(val) {
+      var hls = new Hls();
+      hls.loadSource(val);
+    }
   },
-  mounted: function () {
+  mounted: function() {
     var hls = new Hls();
-    hls.loadSource(
-      "http://js.hls.huya.com/huyalive/29106097-2689446042-11551082794746642432-2789253870-10057-A-0-1_1200.m3u8"
-    );
+    hls.loadSource("http://223.110.242.130:6610/gitv/live1/G_CCTV-1-HQ/1.m3u8");
     hls.attachMedia(this.$refs.videoRef);
-    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
       this.$refs.videoRef.play();
     });
   }
