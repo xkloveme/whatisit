@@ -9,7 +9,10 @@
           style="margin:30px auto;width:40px;height:40px;border-radius: 100%;filter: grayscale(1);"
         />
       </a>
-      <h1 class="home_title">节目名称:{{ playInfo.title }}</h1>
+      <div class="home_title">
+        节目名称:{{ playInfo.title }}
+        <div class="home_change_player">切换播放器……</div>
+      </div>
       <player class="home_video" :url="playInfo.url" v-if="change" />
       <hls class="home_video" :url="playInfo.url" v-else />
     </div>
@@ -97,7 +100,10 @@ export default {
     color-stop(0, #fefefe),
     color-stop(1, #cccccc)
   );
+}
+.home_change_player {
   cursor: pointer;
+  float: left;
 }
 .home_video {
   position: -webkit-sticky;
@@ -132,7 +138,7 @@ export default {
 }
 .right_button {
   cursor: pointer;
-  width: 70%;
+  width: 80%;
   margin: 5px 0;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
   background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);

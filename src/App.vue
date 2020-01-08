@@ -3,7 +3,7 @@
     <about v-if="view" />
     <tab v-else />
     <footer class="footer">
-      Copyright © 冀小康 2020 Power by
+      Copyright © 冀小康 2020 by
       <a href="https://github.com/xkloveme/whatisit" target="_blank"
         >xkloveme</a
       >
