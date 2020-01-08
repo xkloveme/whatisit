@@ -13,11 +13,11 @@ export default {
   //     hls.loadSource(val);
   //   }
   // },
-  mounted: function() {
+  mounted: function () {
     var hls = new Hls();
-    hls.loadSource("http://223.110.242.130:6610/gitv/live1/G_CCTV-1-HQ/1.m3u8");
+    hls.loadSource("http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8");
     hls.attachMedia(this.$refs.videoRef);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
       this.$refs.videoRef.play();
     });
   }

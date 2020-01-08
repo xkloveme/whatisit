@@ -1,10 +1,5 @@
 <template>
-  <VueXgplayer
-    :config="configHls"
-    format="hls"
-    refs="player"
-    @player="HlsPlayer = $event"
-  ></VueXgplayer>
+  <VueXgplayer :config="configHls" format="hls" refs="player" @player="HlsPlayer = $event"></VueXgplayer>
 </template>
 
 <script>
@@ -13,31 +8,31 @@ export default {
   name: "player",
   components: { VueXgplayer },
   props: ["url"],
-  data() {
+  data () {
     return {
       HlsPlayer: null
     };
   },
   computed: {
-    configHls() {
+    configHls () {
       return {
         id: "vs6",
         useHls: true,
         preloadTime: 3000,
         url:
           this.url ||
-          "http://223.110.242.130:6610/gitv/live1/G_CCTV-1-HQ/1.m3u8"
+          "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8"
       };
     }
   },
-  mounted() {
+  mounted () {
     this.getData();
   },
   methods: {
-    getData() {
-      this.$refs["player"].init();
+    getData () {
+      // this.$refs["player"].init();
     },
-    parse() {}
+    parse () { }
   }
 };
 </script>

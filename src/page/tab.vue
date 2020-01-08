@@ -10,23 +10,21 @@
         />
       </a>
       <div class="home_title">
-        节目名称:{{ playInfo.title }}
-        <div class="home_change_player">切换播放器……</div>
+        节目:{{ playInfo.title }}
+        <div class="home_change_player" @click="changePlayer">切换播放器↑↓</div>
       </div>
       <player class="home_video" :url="playInfo.url" v-if="change" />
       <hls class="home_video" :url="playInfo.url" v-else />
     </div>
     <Slide right @closeMenu="closeMenu" disableOutsideClick class="home_right">
       <details class="menu" close v-for="(item, i) in TV" :key="i">
-        <summary> 节目分类{{ i }}</summary>
+        <summary>节目分类{{ i }}</summary>
         <li
           class="right_button"
           v-for="(sub, j) in item"
           :key="j + 1"
           @click="openVideo(sub)"
-        >
-          {{ sub.title }}
-        </li>
+        >{{ sub.title }}</li>
       </details>
     </Slide>
   </div>
@@ -43,26 +41,29 @@ export default {
     hls,
     Slide
   },
-  data() {
+  data () {
     return {
       change: false,
       playInfo: {},
       TV: {}
     };
   },
-  mounted() {
+  mounted () {
     this.getTVList();
   },
   methods: {
-    getTVList() {
+    getTVList () {
       axios.get("tv.json").then(response => {
         this.TV = response.data;
       });
     },
-    openVideo(info) {
+    openVideo (info) {
       this.playInfo = info;
     },
-    closeMenu(a) {
+    changePlayer () {
+      this.change = !this.change
+    },
+    closeMenu (a) {
       console.log("🐛🐛🐛: closeMenu -> a", a);
     }
   }
@@ -103,6 +104,7 @@ export default {
 }
 .home_change_player {
   cursor: pointer;
+  font-size: 12px;
   float: left;
 }
 .home_video {
@@ -141,7 +143,11 @@ export default {
   width: 80%;
   margin: 5px 0;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  background: linear-gradient(
+    to bottom,
+    #ffffff 5%,
+    #f6f6f6 100%
+  );
   background-color: #ffffff;
   border-radius: 6px;
   display: inline-block;
@@ -182,7 +188,7 @@ export default {
   display: none;
 }
 .menu summary:before {
-  content: "+";
+  content: '+';
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -191,10 +197,14 @@ export default {
   font-weight: 700;
 }
 .menu[open] summary:before {
-  content: "-";
+  content: '-';
 }
 .right_button:hover {
-  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background: linear-gradient(
+    to bottom,
+    #f6f6f6 5%,
+    #ffffff 100%
+  );
   background-color: #f6f6f6;
 }
 .right_button:active {
