@@ -1,13 +1,9 @@
 <template>
-  <div>
-    hls:
-    <VueXgplayer :config="configHls" format="hls" @player="HlsPlayer = $event"></VueXgplayer>
-  </div>
+  <VueXgplayer :config="configHls" format="hls" @player="HlsPlayer = $event"></VueXgplayer>
 </template>
 
 <script>
 import VueXgplayer from "./../components/xgplayer-vue";
-// import { movies } from "./../assets/movies.m3u";
 export default {
   name: "player",
   components: { VueXgplayer },
@@ -16,10 +12,7 @@ export default {
       configHls: {
         id: "vs6",
         useHls: true,
-        preloadTime: 300,
-        // preview: {
-        //   uploadEl: uploadDom
-        // },
+        preloadTime: 3000,
         url:
           "http://js.hls.huya.com/huyalive/29106097-2689446042-11551082794746642432-2789253870-10057-A-0-1_1200.m3u8"
       },

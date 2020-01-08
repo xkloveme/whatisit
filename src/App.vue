@@ -1,30 +1,20 @@
 <template>
   <div id="app">
-    <!-- <flowPlayer /> -->
-    <hls />
-    <videoJs />
     <about v-if="view" />
-    <player v-else />
+    <tab v-else />
   </div>
 </template>
 
 <script>
-// import encode from "./components/encode.vue";
-import player from "./page/player";
 import about from "./page/about";
-import videoJs from "./page/video";
-// import flowPlayer from "./page/flowplayer";
-import hls from "./page/hls";
+import tab from "./page/tab";
 import { addListener, lanuch } from "devtools-detector";
 
 export default {
   name: "app",
   components: {
-    player,
-    about,
-    videoJs,
-    hls
-    // flowPlayer
+    tab,
+    about
   },
   data() {
     return {
@@ -49,6 +39,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
