@@ -22,12 +22,13 @@ export default {
     };
   },
   mounted() {
-    if (!process.env.BABEL_ENV === "development") {
-      addListener(isOpen => {
-        this.view = isOpen;
-      });
-      lanuch();
-    }
+    // console.log(process.env.BABEL_ENV);
+    // if (!process.env.BABEL_ENV === "development") {
+    addListener(isOpen => {
+      this.view = isOpen;
+    });
+    lanuch();
+    // }
   }
 };
 </script>

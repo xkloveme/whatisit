@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "cross-env BABEL_ENV=development vue-cli-service  serve",
-    "build": "vue-cli-service build",
+    "dev": "cross-env BABEL_ENV=development vue-cli-service  serve",
+    "serve": "cross-env BABEL_ENV=prod vue-cli-service  serve",
+    "build": "vue-cli-service BABEL_ENV=prod build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

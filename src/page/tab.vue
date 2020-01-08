@@ -47,7 +47,6 @@ export default {
       });
     },
     openVideo(info) {
-      console.log("🐛🐛🐛: openVideo -> info", info);
       this.play = info;
     }
   }
