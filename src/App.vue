@@ -2,6 +2,19 @@
   <div id="app">
     <about v-if="view" />
     <tab v-else />
+    <footer class="footer">
+      Copyright © 冀小康 2020 Theme by
+      <a href="https://github.com/xkloveme/whatisit">xkloveme</a>
+      <iframe
+        style="margin-left: 2px; margin-bottom:-5px;"
+        frameborder="0"
+        scrolling="0"
+        width="91px"
+        height="20px"
+        src="https://ghbtns.com/github-btn.html?user=xkloveme&repo=whatisit&type=star&count=true"
+      >
+      </iframe>
+    </footer>
   </div>
 </template>
 
@@ -18,7 +31,8 @@ export default {
   },
   data() {
     return {
-      view: false
+      view: true,
+      start: 2
     };
   },
   mounted() {
@@ -27,6 +41,8 @@ export default {
         this.view = isOpen;
       });
       lanuch();
+    } else {
+      this.view = false;
     }
   }
 };
@@ -39,5 +55,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.footer {
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
 }
 </style>

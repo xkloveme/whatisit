@@ -1,10 +1,11 @@
 <template>
   <div class="page_home">
     <div class="home_left">
-      <hls />
-      <player />
+      <h1 style="color:red;">haha</h1>
+      <!-- <hls />
+      <player /> -->
     </div>
-    <div class="home_right">
+    <Slide right @closeMenu="closeMenu" disableOutsideClick class="home_right">
       <details class="menu" close v-for="(item, i) in TV" :key="i">
         <summary> 节目{{ i }}</summary>
         <li
@@ -16,18 +17,20 @@
           {{ sub.title }}
         </li>
       </details>
-    </div>
+    </Slide>
   </div>
 </template>
 
 <script>
-import player from "./player";
-import hls from "./hls";
+// import player from "./player";
+// import hls from "./hls";
+import { Slide } from "vue-burger-menu";
 import axios from "axios";
 export default {
   components: {
-    player,
-    hls
+    // player,
+    // hls,
+    Slide
   },
   data() {
     return {
@@ -42,24 +45,24 @@ export default {
   methods: {
     getTVList() {
       axios.get("tv.json").then(response => {
-        console.log(response.data);
         this.TV = response.data;
       });
     },
     openVideo(info) {
       this.play = info;
+    },
+    closeMenu(a) {
+      console.log("🐛🐛🐛: closeMenu -> a", a);
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .page_home {
-  display: flex;
-  justify-content: flex-start;
 }
 .home_left {
-  position: -webkit-sticky;
+  /* position: -webkit-sticky;
   position: sticky;
   width: 100%;
   height: 500px;
@@ -67,12 +70,17 @@ export default {
   color: #fff;
   margin-bottom: 50px;
   top: 0;
-  z-index: 1;
+  z-index: 1; */
 }
 .home_right {
   width: 100%;
   margin: 5px;
+  font-size: 20px;
   user-select: none;
+}
+.bm-item-list {
+  color: #000 !important;
+  margin-left: 0% !important;
 }
 .right_button {
   cursor: pointer;
@@ -82,7 +90,6 @@ export default {
   background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
   background-color: #ffffff;
   border-radius: 6px;
-  border: 1px solid #dcdcdc;
   display: inline-block;
   cursor: pointer;
   color: #666666;

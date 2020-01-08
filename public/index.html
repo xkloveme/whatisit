@@ -10,6 +10,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title>弄啥哩whatisit</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-102352377-2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-102352377-2");
+    </script>
   </head>
   <body>
     <noscript>
@@ -22,14 +36,6 @@
     <!-- built files will be auto injected -->
   </body>
   <style>
-    * {
-      -webkit-touch-callout: none; /*系统默认菜单被禁用*/
-       -webkit-user-select: none; /*webkit浏览器*/
-       -khtml-user-select: none; /*早期浏览器*/
-       -moz-user-select: none; /*火狐*/
-       -ms-user-select: none; /*IE10*/
-       user-select: none;
-    }
     html {
       /* 标准字体大小可以，在移动端使用的rem适配的话会动态改变。 */
       font-size: 14px;

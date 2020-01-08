@@ -16,6 +16,7 @@
     "hls.js": "^0.12.4",
     "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.6.10",
+    "vue-burger-menu": "^2.0.3",
     "vue-codemirror": "^4.0.6",
     "vue-video-player": "^5.0.2",
     "xgplayer": "^2.3.6",
