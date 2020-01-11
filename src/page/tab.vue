@@ -1,13 +1,7 @@
 <template>
   <div class="page_home">
-    <Slide
-      right
-      PushRotate
-      ref="sliderMenu"
-      disableOutsideClick
-      class="home_right"
-    >
-      <details class="menu" close v-for="(item, i) in TV" :key="i">
+    <Slide right PushRotate ref="sliderMenu" class="home_right">
+      <details class="menu" open v-for="(item, i) in TV" :key="i">
         <summary>节目分类{{ i }}</summary>
         <li
           class="right_button"
