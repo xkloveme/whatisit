@@ -24,7 +24,9 @@
           v-for="(sub, j) in item"
           :key="j + 1"
           @click="openVideo(sub)"
-        >{{ sub.title }}</li>
+        >
+          {{ sub.title }}
+        </li>
       </details>
     </Slide>
   </div>
@@ -34,36 +36,40 @@
 import player from "./player";
 import hls from "./hls";
 import { Slide } from "vue-burger-menu";
-import axios from "axios";
+// import axios from "axios";
 export default {
   components: {
     player,
     hls,
     Slide
   },
-  data () {
+  data() {
     return {
       change: false,
       playInfo: {},
       TV: {}
     };
   },
-  mounted () {
+  mounted() {
     this.getTVList();
   },
   methods: {
-    getTVList () {
-      axios.get("tv.json").then(response => {
-        this.TV = response.data;
-      });
+    getTVList() {
+      fetch("tv.json")
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          this.TV = data;
+        });
     },
-    openVideo (info) {
+    openVideo(info) {
       this.playInfo = info;
     },
-    changePlayer () {
-      this.change = !this.change
+    changePlayer() {
+      this.change = !this.change;
     },
-    closeMenu (a) {
+    closeMenu(a) {
       console.log("🐛🐛🐛: closeMenu -> a", a);
     }
   }
@@ -143,11 +149,7 @@ export default {
   width: 80%;
   margin: 5px 0;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(
-    to bottom,
-    #ffffff 5%,
-    #f6f6f6 100%
-  );
+  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
   background-color: #ffffff;
   border-radius: 6px;
   display: inline-block;
@@ -188,7 +190,7 @@ export default {
   display: none;
 }
 .menu summary:before {
-  content: '+';
+  content: "+";
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -197,14 +199,10 @@ export default {
   font-weight: 700;
 }
 .menu[open] summary:before {
-  content: '-';
+  content: "-";
 }
 .right_button:hover {
-  background: linear-gradient(
-    to bottom,
-    #f6f6f6 5%,
-    #ffffff 100%
-  );
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
   background-color: #f6f6f6;
 }
 .right_button:active {
