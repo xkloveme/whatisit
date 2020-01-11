@@ -1,22 +1,12 @@
 <template>
   <div class="page_home">
-    <div class="home_left">
-      <a href="https://github.com/xkloveme/whatisit" target="_blank">
-        <img
-          src="./../assets/logo.png"
-          alt="弄啥哩"
-          class="Rotation"
-          style="margin:30px auto;width:40px;height:40px;border-radius: 100%;filter: grayscale(1);"
-        />
-      </a>
-      <div class="home_title">
-        节目:{{ playInfo.title }}
-        <div class="home_change_player" @click="changePlayer">切换播放器↑↓</div>
-      </div>
-      <player class="home_video" :url="playInfo.url" v-if="change" />
-      <hls class="home_video" :url="playInfo.url" v-else />
-    </div>
-    <Slide right @closeMenu="closeMenu" disableOutsideClick class="home_right">
+    <Slide
+      right
+      PushRotate
+      ref="sliderMenu"
+      disableOutsideClick
+      class="home_right"
+    >
       <details class="menu" close v-for="(item, i) in TV" :key="i">
         <summary>节目分类{{ i }}</summary>
         <li
@@ -29,6 +19,24 @@
         </li>
       </details>
     </Slide>
+    <main class="home_left" id="page-wrap">
+      <a href="https://github.com/xkloveme/whatisit" target="_blank">
+        <img
+          src="./../assets/logo.png"
+          alt="弄啥哩"
+          class="Rotation"
+          style="margin:30px auto;width:40px;height:40px;border-radius: 100%;filter: grayscale(1);"
+        />
+      </a>
+      <div class="home_title">
+        节目:{{ playInfo.title }}
+        <div class="home_change_player" @click="changePlayer">切换播放器↑↓</div>
+      </div>
+      <div v-if="isRouterAlive">
+        <player class="home_video" :url="playInfo.url" v-if="change" />
+        <hls class="home_video" :url="playInfo.url" v-else />
+      </div>
+    </main>
   </div>
 </template>
 
@@ -45,6 +53,7 @@ export default {
   },
   data() {
     return {
+      isRouterAlive: true,
       change: false,
       playInfo: {},
       TV: {}
@@ -64,14 +73,17 @@ export default {
         });
     },
     openVideo(info) {
+      this.isRouterAlive = false;
       this.playInfo = info;
+      this.$refs["sliderMenu"].closeMenu();
+      this.$nextTick(() => (this.isRouterAlive = true));
     },
     changePlayer() {
       this.change = !this.change;
-    },
-    closeMenu(a) {
-      console.log("🐛🐛🐛: closeMenu -> a", a);
     }
+    // closeMenu(a) {
+    //   console.log("🐛🐛🐛: closeMenu -> a", a);
+    // }
   }
 };
 </script>
@@ -122,7 +134,6 @@ export default {
   margin-bottom: 50px;
   top: 0;
   z-index: 1;
-  pointer-events: none;
 }
 
 .Rotation {
