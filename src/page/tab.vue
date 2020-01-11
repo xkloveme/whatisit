@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       isRouterAlive: true,
-      change: false,
+      change: true,
       playInfo: {},
       TV: {}
     };
