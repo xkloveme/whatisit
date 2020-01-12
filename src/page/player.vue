@@ -1,7 +1,7 @@
 <template>
   <VueXgplayer
     :config="configHls"
-    format="hls"
+    format="format"
     refs="player"
     @player="HlsPlayer = $event"
   ></VueXgplayer>
@@ -15,7 +15,8 @@ export default {
   props: ["url"],
   data() {
     return {
-      HlsPlayer: null
+      HlsPlayer: null,
+      format: "flv"
     };
   },
   computed: {

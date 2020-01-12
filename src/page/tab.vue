@@ -8,6 +8,7 @@
           v-for="(sub, j) in item"
           :key="j + 1"
           @click="openVideo(sub)"
+          :title="sub.url"
         >
           {{ sub.title }}
         </li>

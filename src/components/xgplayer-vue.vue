@@ -7,8 +7,8 @@ import Player from "xgplayer";
 // import "xgplayer-mp4";
 import HlsJsPlayer from "xgplayer-hls.js";
 import "xgplayer-hls";
-// import FlvJsPlayer from "xgplayer-flv.js";
-// import FlvPlayer from 'xgplayer-flv'
+import FlvJsPlayer from "xgplayer-flv.js";
+import FlvPlayer from "xgplayer-flv";
 import ShakaJsPlayer from "xgplayer-shaka";
 import Music from "xgplayer-music";
 
@@ -76,13 +76,11 @@ export default {
             1
           );
           this.player = new Player(this.config);
-        }
-        //  else if (this.format === 'flv') {
-        //   this.player = new FlvJsPlayer(this.config)
-        // } else if (this.format === 'xg-flv') {
-        //   this.player = new FlvPlayer(this.config)
-        // }
-        else if (this.format === "dash") {
+        } else if (this.format === "flv") {
+          this.player = new FlvJsPlayer(this.config);
+        } else if (this.format === "xg-flv") {
+          this.player = new FlvPlayer(this.config);
+        } else if (this.format === "dash") {
           this.player = new ShakaJsPlayer(this.config);
         } else if (this.format === "xg-mp4") {
           this.config.ignores.splice(
