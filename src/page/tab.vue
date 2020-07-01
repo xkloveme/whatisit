@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     getTVList() {
-      fetch("tv.json")
+      fetch("https://www.jixiaokang.com/iptv-m3u/tv.json")
         .then(res => {
           return res.json();
         })
