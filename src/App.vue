@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <about v-if="view" />
-    <tab v-else />
+    <!-- <XKvideo  /> -->
+    <div v-else>
+    <router-view />
+    </div>
     <footer class="footer">
       Copyright © 冀小康 2020 by
       <a href="https://github.com/xkloveme/whatisit" target="_blank"
@@ -22,13 +25,13 @@
 
 <script>
 import about from "./page/about";
-import tab from "./page/tab";
+// import XKvideo from "./page/newVideo";
 import { addListener, lanuch } from "devtools-detector";
 
 export default {
   name: "app",
   components: {
-    tab,
+    // XKvideo,
     about
   },
   data() {

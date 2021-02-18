@@ -1,13 +1,16 @@
 
 import Vue from 'vue'
 import App from './App.vue'
-// import { codemirror } from 'vue-codemirror'
-// import VueXgplayer from './components/xgplayer-vue.vue'
-import 'codemirror/lib/codemirror.css'
+import router from './router'
 
+import 'codemirror/lib/codemirror.css'
+import {
+  firestorePlugin
+} from 'vuefire'
+Vue.use(firestorePlugin)
 Vue.config.productionTip = false
-// Vue.use(codemirror)
-// Vue.component(VueXgplayer, VueXgplayer)
+
 new Vue({
   render: h => h(App),
+  router,
 }).$mount('#app')

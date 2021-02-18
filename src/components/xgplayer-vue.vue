@@ -1,5 +1,5 @@
 <template>
-  <div :id="config.id" :style="rootStyle"></div>
+  <div id="mse" :style="rootStyle"></div>
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
     },
     format: {
       type: String,
-      default: "mp4"
+      default: "hls"
     },
     rootStyle: {
       type: Object,
