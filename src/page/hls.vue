@@ -30,6 +30,16 @@ export default {
       playbackRate: [1, 1.2, 1.5, 2, 2.5, 3, 3.5, 4, 5, 10],
       download: false,
       pip: true,
+      "rotate": {
+				"clockwise": false,
+				"innerRotate": false
+		},
+		"closeVideoClick": true,
+		"closeVideoDblclick": true,
+		"closeVideoTouch": true,
+		"keyShortcut": "off",
+		"x5-video-player-fullscreen": "false",
+		"x5-video-orientation": "landscape"
     })
     // hls.loadSource(
     //   this.url ||
