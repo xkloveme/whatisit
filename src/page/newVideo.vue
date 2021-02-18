@@ -1,18 +1,22 @@
 <template>
   <div>
     <a href="https://github.com/xkloveme/whatisit" target="_blank">
-      <img
+    <div class="display-list" style="justify-content:center">
+  <img
         src="./../assets/logo.png"
         alt="弄啥哩"
         class="Rotation"
         style="
-          margin: 30px auto;
+          margin: 10px;
           width: 40px;
           height: 40px;
           border-radius: 100%;
           filter: grayscale(1);
         "
       />
+      <div>{{title}}</div>
+    </div>
+    
     </a>
     <div class="display-list">
       <div class="button-list button-list1">
@@ -41,6 +45,7 @@ export default {
   data() {
     return {
       active: true,
+      title:'小康之家',
       playInfo: {
         url: '//qingxi.xi-zuida.com/20210214/1225_6874a886/index.m3u8',
       },
@@ -55,6 +60,7 @@ export default {
       this.active = false
       this.playInfo.url = this.$route.query.url
       window.title = this.$route.query.name || '小康之家'
+      this.title = this.$route.query.name || '小康之家'
       this.$nextTick(() => {
         this.active = true
       })

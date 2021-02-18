@@ -28,7 +28,7 @@ export default {
       whitelist: [''],
       fluid: true,
       playbackRate: [1, 1.2, 1.5, 2, 2.5, 3, 3.5, 4, 5, 10],
-      download: true,
+      download: false,
       pip: true,
     })
     // hls.loadSource(

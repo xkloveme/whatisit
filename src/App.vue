@@ -1,10 +1,5 @@
 <template>
   <div id="app">
-    <about v-if="view" />
-    <!-- <XKvideo  /> -->
-    <div v-else>
-    <router-view />
-    </div>
     <footer class="footer">
       Copyright © 冀小康 2020 by
       <a href="https://github.com/xkloveme/whatisit" target="_blank"
@@ -20,6 +15,12 @@
       >
       </iframe>
     </footer>
+    <about v-if="view" />
+    <!-- <XKvideo  /> -->
+    <div v-else>
+    <router-view />
+    </div>
+    
   </div>
 </template>
 
