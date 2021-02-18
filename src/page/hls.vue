@@ -29,7 +29,7 @@ export default {
       fluid: true,
       playbackRate: [1, 1.2, 1.5, 2, 2.5, 3, 3.5, 4, 5, 10],
       download: false,
-      pip: true,
+      pip: false,
       "rotate": {
 				"clockwise": false,
 				"innerRotate": false
