@@ -38,8 +38,7 @@ export default {
 		"closeVideoDblclick": true,
 		"closeVideoTouch": true,
 		"keyShortcut": "off",
-		"x5-video-player-fullscreen": "false",
-		"x5-video-orientation": "landscape"
+		"x5-video-player-fullscreen": "false"
     })
     // hls.loadSource(
     //   this.url ||

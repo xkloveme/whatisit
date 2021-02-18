@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <footer class="footer">
-      Copyright © 冀小康 2020 by
+      Copyright © 冀小康 2021 by
       <a href="https://github.com/xkloveme/whatisit" target="_blank"
         >xkloveme</a
       >
