@@ -30,14 +30,10 @@ export default {
       playbackRate: [1, 1.2, 1.5, 2, 2.5, 3, 3.5, 4, 5, 10],
       download: false,
       pip: false,
-      "rotate": {
-				"clockwise": false,
-				"innerRotate": false
-		},
 		"closeVideoClick": true,
 		"closeVideoDblclick": true,
 		"closeVideoTouch": true,
-		"keyShortcut": "off",
+		"keyShortcut": "on",
 		"x5-video-player-fullscreen": "false"
     })
     // hls.loadSource(
