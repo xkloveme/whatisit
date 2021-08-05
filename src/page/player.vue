@@ -28,7 +28,7 @@ export default {
       id: 'videoRef',
       url:
         this.url ||
-        'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-fb13c39a-ce5d-4fbc-9fe5-96360b09fdec/8f8ab07f-a07b-419d-b6a9-85be9bd33f67.mov',
+        'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-fb13c39a-ce5d-4fbc-9fe5-96360b09fdec/d77601e7-e586-4685-a0f9-a9d1791ed7b3.mov',
       useHls: false,
       playsinline: true,
       whitelist: [''],
