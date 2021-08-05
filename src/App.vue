@@ -27,7 +27,7 @@
 <script>
 import about from "./page/about";
 // import XKvideo from "./page/newVideo";
-import { addListener, lanuch } from "devtools-detector";
+// import { addListener, lanuch } from "devtools-detector";
 
 export default {
   name: "app",
@@ -42,12 +42,12 @@ export default {
     };
   },
   mounted() {
-    if (process.env.BABEL_ENV !== "development") {
-      addListener(isOpen => {
-        this.view = isOpen;
-      });
-      lanuch();
-    }
+    // if (process.env.BABEL_ENV !== "development") {
+    //   addListener(isOpen => {
+    //     this.view = isOpen;
+    //   });
+    //   lanuch();
+    // }
   }
 };
 </script>
