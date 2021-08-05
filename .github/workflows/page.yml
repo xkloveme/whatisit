@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
         with:
-          repository: xkloveme/utools-desktop-cloud
+          repository: xkloveme/whatisit
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
