@@ -1,0 +1,49 @@
+name: AutoUpdate
+
+on: 
+  push:
+    branches:
+      - 'master'
+      - 'dev'
+      
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          repository: xkloveme/utools-desktop-cloud
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Build
+        run: |
+          git config --global core.quotepath false
+          git ls-files | while read file; do touch -d $(git log -1 --format="@%ct" "$file") "$file"; done
+          python3 generate.py
+          npm install
+          npm run build
+      - name: Commit files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action[Bot]"
+          git add -A
+          git commit -m "update built files after user commit"
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          ACCESS_TOKEN: ${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}
+          # 部署到 gh-pages 分支
+          BRANCH: gh-pages
+          # 部署目录为 VuePress 的默认输出目录
+          FOLDER: dist

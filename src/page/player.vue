@@ -1,46 +1,49 @@
 <template>
-  <VueXgplayer
-    :config="configHls"
-    format="format"
-    refs="player"
-    @player="HlsPlayer = $event"
-  ></VueXgplayer>
+  <div id="videoRef" width="800" controls></div>
 </template>
 
 <script>
-import VueXgplayer from "./../components/xgplayer-vue";
+// import Hls from "hls.js";
+import 'xgplayer'
+import HlsJsPlayer from 'xgplayer-hls.js'
+
 export default {
-  name: "player",
-  components: { VueXgplayer },
-  props: ["url"],
   data() {
     return {
-      HlsPlayer: null,
-      format: "flv"
-    };
-  },
-  computed: {
-    configHls() {
-      return {
-        id: "vs6",
-        useHls: true,
-        preloadTime: 3000,
-        url:
-          this.url ||
-          "//qingxi.xi-zuida.com/20210214/1225_6874a886/index.m3u8"
-      };
+      active: false,
+      url: '',
+      title: '',
     }
   },
-  mounted() {
-    this.getData();
+  mounted: function () {
+    if (this.$route.query.format) {
+      this.format = this.$route.query.format
+    }
+    if (this.$route.query.url) {
+      this.active = false
+      this.url = this.$route.query.url
+      window.title = this.$route.query.name || '小康之家'
+    }
+    new HlsJsPlayer({
+      id: 'videoRef',
+      url:
+        this.url ||
+        'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-fb13c39a-ce5d-4fbc-9fe5-96360b09fdec/8f8ab07f-a07b-419d-b6a9-85be9bd33f67.mov',
+      useHls: false,
+      playsinline: true,
+      whitelist: [''],
+      fluid: true,
+      playbackRate: [1, 1.2, 1.5, 2, 2.5, 3, 3.5, 4, 5, 10],
+      download: false,
+      pip: false,
+      closeVideoClick: true,
+      closeVideoDblclick: true,
+      closeVideoTouch: true,
+      keyShortcut: 'on',
+      'x5-video-player-fullscreen': 'false',
+    })
   },
-  methods: {
-    getData() {
-      this.$refs["player"].init();
-    },
-    parse() {}
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

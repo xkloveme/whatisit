@@ -4,7 +4,7 @@
 
 <script>
 import Player from "xgplayer";
-// import "xgplayer-mp4";
+import "xgplayer-mp4";
 import HlsJsPlayer from "xgplayer-hls.js";
 import "xgplayer-hls";
 import FlvJsPlayer from "xgplayer-flv.js";
