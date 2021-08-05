@@ -1,47 +1,52 @@
-name: AutoUpdate
+name: docs
 
-on: 
+on:
+  # 每当 push 到 main 分支时触发部署
   push:
-    branches:
-      - 'master'
-      - 'dev'
-      
+    branches: [master]
+  # 手动触发部署
   workflow_dispatch:
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
-          repository: xkloveme/whatisit
-      - name: Set up Node
-        uses: actions/setup-node@v2
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: 12
-      - name: Set up Python
-        uses: actions/setup-python@v2
+          # 选择要使用的 node 版本
+          node-version: "14"
+
+      # 缓存 node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
         with:
-          python-version: 3.8
-      - name: Build
-        run: |
-          git config --global core.quotepath false
-          git ls-files | while read file; do touch -d $(git log -1 --format="@%ct" "$file") "$file"; done
-          npm install
-          npm run build
-      - name: Commit files
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Action[Bot]"
-          git add -A
-          git commit -m "update built files after user commit"
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      # 如果缓存没有命中，安装依赖
+      - name: Install dependencies
+        run: yarn
+
+      # 运行构建脚本
+      - name: Build  site
+        run: yarn build
+
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          ACCESS_TOKEN: ${{ secrets.github-pages }}
+          ACCESS_TOKEN: ${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}
           # 部署到 gh-pages 分支
           BRANCH: gh-pages
           # 部署目录为 VuePress 的默认输出目录
